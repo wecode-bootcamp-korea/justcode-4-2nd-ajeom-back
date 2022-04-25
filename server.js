@@ -1,14 +1,16 @@
 const http = require("http");
 const express = require("express");
 const routes = require("./routes"); 
-const dotenv = require("dotenv");
-//const {PrismaClient} =require('@prisma/client')
+const cors = require('cors');
+const { PrismaClient } = require("@prisma/client");
 
-//const prisma = new PrismaClient();
+const prisma = new PrismaClient();
 
 const app = express();
+app.use(cors());
 
 app.use(express.json());
+
 app.use(routes);
 
 app.get("/ping", (req, res) => {
@@ -16,7 +18,6 @@ app.get("/ping", (req, res) => {
 });
 
 const server = http.createServer(app);
-dotenv.config();
 const PORT = process.env.PORT;
 
 const start = async () => {
