@@ -5,9 +5,9 @@ const axios = require('axios');
 const res = require('express/lib/response');
 const { response } = require('express');
 const YOUR_SECRET_KET = process.env.SECRET_KEY;
-const localStorage =require('localStorage')
 
-const userCheck =async data => {
+
+const userCheck = async data => {
     console.log(data)
     const userInfo = await userDao.getUserImpormetion(data.id)
     
@@ -18,7 +18,7 @@ const userCheck =async data => {
         const TOKEN = jwt.sign({kakaoId: userInfo[0].kakao_id},YOUR_SECRET_KET);
        
     }else{
-
+        //기존유저가 아니면 else
         
         const userImp = await userDao.createUser(data.id,data.properties.nickname,data.properties.profile_image)
         const TOKEN = jwt.sign({kakaoId: data.id},YOUR_SECRET_KET);
