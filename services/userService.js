@@ -9,18 +9,18 @@ const YOUR_SECRET_KET = process.env.SECRET_KEY;
 
 const userCheck = async data => {
     //console.log(data)
-    const userInfo = await userDao.getUserImpormetion(data.id)
-    const TOKEN = jwt.sign({kakaoId: data.id},YOUR_SECRET_KET);
+    const userInfo = await userDao.getUserImpormetion(data.id);
+    const TOKEN = jwt.sign({ajeomId: userInfo[0].id},YOUR_SECRET_KET);
     
     if(userInfo.length ==0){
         
         const userImp = await userDao.createUser(data.id,data.properties.nickname,data.properties.profile_image)
-        
+          
     }
-    console.log("UsercheakToken",TOKEN)
+    
     return TOKEN;
-
-    //프론트단에 토큰전달
+    
+   
 }
 
 const signupAndLogin = async (access_token) => {
@@ -35,7 +35,7 @@ const signupAndLogin = async (access_token) => {
         }
         })
         const userToken = await userCheck(getKakaoUser.data)
-        console.log("Userlogin-------",userToken)
+        
         return userToken
     
       
@@ -47,4 +47,15 @@ const signupAndLogin = async (access_token) => {
     
 }   
 
-module.exports = { signupAndLogin };
+
+const getUserProfile = async (userId) =>{
+    try{
+        const ajeomProfile = await userDao.getUserProfile(userId);
+        return ajeomProfile
+
+    }catch(err){
+        console.log(err);
+    }
+}   
+
+module.exports = { signupAndLogin,getUserProfile };
