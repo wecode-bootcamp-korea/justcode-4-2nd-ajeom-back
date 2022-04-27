@@ -25,9 +25,15 @@ const getAuthorList = async () => {
     SELECT id, nickname, description, profile_img_url FROM users WHERE is_author = 1;`;
 };
 
+const updateIsAuthor = async (userId, description) => {
+  return await prisma.$queryRaw`
+    UPDATE users SET description = ${description}, is_author = 1 WHERE id = ${userId};`;
+};
+
 module.exports = {
   getUserImpormetion,
   createUser,
   getUserProfile,
   getAuthorList,
+  updateIsAuthor,
 };
