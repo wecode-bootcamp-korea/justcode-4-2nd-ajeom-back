@@ -19,7 +19,7 @@ const getUserProfile = async (req, res) => {
     try{
         const userId = req.userId;
         const ajeomProfile = await userService.getUserProfile(userId);
-        return res.status(201).json({ajeomProfile});
+        return res.status(201).json(ajeomProfile[0]);
 
     }catch(err){
         console.log(err);

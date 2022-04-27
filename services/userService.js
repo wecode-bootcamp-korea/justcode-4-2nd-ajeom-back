@@ -35,7 +35,7 @@ const signupAndLogin = async (access_token) => {
         }
         })
         const userToken = await userCheck(getKakaoUser.data)
-        
+        console.log("data",getKakaoUser.data)
         return userToken
     
       
