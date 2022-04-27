@@ -9,7 +9,7 @@ const createPost = async (
   isPublished,
   thumbnailUrl,keywordIdList
 ) => {
-  const newPost = await writeDao.createPost(
+  const post_id = await writeDao.createPost(
     title,
     body,
     summary,
@@ -18,7 +18,7 @@ const createPost = async (
     isPublished,
     thumbnailUrl,keywordIdList
   );
-  return newPost;
+  return post_id;
 };
 
 module.exports = { createPost };

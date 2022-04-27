@@ -16,7 +16,7 @@ for(i=0;i<postIdList.length;i++){
     INSERT INTO book_posts (post_id,book_id,sequence) VALUES
   (${postIdList[i]},${book_id.id},${i+1});`;
 }
-  return ;
+  return book_id.id;
 };
 
 const getBook =  async (id) => {

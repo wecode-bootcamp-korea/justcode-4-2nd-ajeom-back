@@ -29,13 +29,13 @@ SELECT *
 FROM posts
 ORDER BY id DESC
 LIMIT 1`;
-console.log(post_id.id)
+
 	for(i=0;i<keywordIdList.length;i++){
 		await prisma.$queryRaw`
 		INSERT INTO post_keywords (post_id,keyword_id) VALUES
 	  (${post_id.id},${keywordIdList[i]});`;
 	}
-	return;
+	return post_id.id;
 };
 
 module.exports = { createPost };
