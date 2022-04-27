@@ -2,7 +2,7 @@ const { PrismaClient } = require("@prisma/client");
 
 const prisma = new PrismaClient();
 
-// 전체 키워드 리스트
+// 전체 키워드 리스트 불러오기
 const getKeywords = async () => {
   return await prisma.$queryRaw`
 		SELECT id, name
