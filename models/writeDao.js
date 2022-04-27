@@ -38,4 +38,13 @@ LIMIT 1`;
 	return post_id.id;
 };
 
-module.exports = { createPost };
+
+const delPost =  async (id,user_id) => {
+
+	await prisma.$queryRaw` 
+	 DELETE FROM posts
+	WHERE posts.id = ${id} and posts.user_id = ${user_id};`;
+  ;
+  return ;
+  }
+module.exports = { createPost,delPost  };

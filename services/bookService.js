@@ -29,6 +29,16 @@ const getBook_postList = async (id) => {
     console.log(err);
   }
 };
+
+const delBook = async (id,user_id) => {
+  try {
+
+     await bookDao.delBook(id,user_id);
+    return;
+  } catch (err) {
+    console.log(err);
+  }
+};
 module.exports = {
-    postBook,getBook,getBook_postList
+    postBook,getBook,getBook_postList,delBook
 };

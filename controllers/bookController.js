@@ -29,7 +29,17 @@ const getBook_postList = async (req, res) => {
   }
 };
 
+const delBook = async (req, res) => {
+  try {
+    const { id } = req.params;
+    await bookService.delBook(id,req.userId );
+    return res.status(200).json({ message: "delet success" });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 
 module.exports = {
-    postBook,getBook,getBook_postList
+    postBook,getBook,getBook_postList,delBook 
 };

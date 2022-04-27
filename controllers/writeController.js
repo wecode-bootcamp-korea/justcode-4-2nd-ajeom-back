@@ -28,5 +28,14 @@ const createPost = async (req, res) => {
     return res.status(err.statusCode || 500).json({ message: err.message });
   }
 };
+const delPost = async (req, res) => {
+  try {
+    const { id } = req.params;
+    await writeDao.delPost(id,req.userId );
+    return res.status(200).json({ message: "delet success" });
+  } catch (err) {
+    console.log(err);
+  }
+};
 
-module.exports = { createPost };
+module.exports = { createPost ,delPost};

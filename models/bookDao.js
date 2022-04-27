@@ -20,7 +20,7 @@ for(i=0;i<postIdList.length;i++){
 };
 
 const getBook =  async (id) => {
-  return prisma.$queryRaw`
+  return  await prisma.$queryRaw`
   select 
       bo.id id,
       bo.title title,
@@ -35,7 +35,7 @@ const getBook =  async (id) => {
 }
 
 const getBook_postList =  async (id) => {
-  return prisma.$queryRaw`
+  return  await prisma.$queryRaw`
   SELECT posts.id,posts.title AS post_title,posts.summary AS post_summary,posts.thumbnail_url AS post_thumbnail_url
   FROM 
   posts
@@ -44,7 +44,20 @@ const getBook_postList =  async (id) => {
   WHERE C.id = ${id}`;
 }
 
+const delBook =  async (id,user_id) => {
+  await  prisma.$queryRaw` 
+  DELETE FROM book_posts
+  WHERE book_posts.book_id = ${id};`
+
+  await prisma.$queryRaw` 
+   DELETE FROM books
+  WHERE books.id = ${id} and books.user_id = ${user_id};`;
+;
+return ;
+}
+
+
 
 module.exports = {
-    postBook,getBook,getBook_postList
+    postBook,getBook,getBook_postList,delBook
 };

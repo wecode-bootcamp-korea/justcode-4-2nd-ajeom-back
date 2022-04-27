@@ -4,5 +4,5 @@ const authorizedUser = require("../middlewares/authorization");
 const writeController = require("../controllers/writeController");
 
 router.post("/", authorizedUser.getUserIdByVerifyToken,writeController.createPost);
-
+router.delete("/:id",authorizedUser.getUserIdByVerifyToken,writeController.delPost);
 module.exports = router;
