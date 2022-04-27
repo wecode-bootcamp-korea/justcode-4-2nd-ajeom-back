@@ -66,8 +66,8 @@ model Keyword {
 model Post {
   id            Int      @id @default(autoincrement())
   title         String
-  body          String
-  summary       String
+  body          String @db.LongText
+  summary       String @db.LongText
   subtitle      String 
   user_id       Int
   is_published  Boolean
@@ -86,8 +86,8 @@ model Book {
   id            Int      @id @default(autoincrement())
   title         String
   user_id       String
-  bookcover_url String
-  description   String
+  bookcover_url String @db.LongText
+  description   String @db.LongText
   created_at    DateTime @default(now())
   updated_at    DateTime @default(now())
 
