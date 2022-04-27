@@ -1,19 +1,49 @@
 -- insert category data
 INSERT INTO categories(name)
 VALUES
-("역사"),
-("영화"),
-("여행"),
-("글쓰기")
+("IT"),
+("미분류")
 ;
 
 -- insert keyword data
-INSERT INTO keywords(name, category_id, is_main)
+INSERT INTO keywords (name, category_id, is_main)
 VALUES
-("스마트폰", 1, false),
-("인공지능", 1, false),
-("UX", 1, false),
-("구글", 1, false)
+('지구한바퀴 세계여행',  '2',  TRUE),
+('그림·웹툰',  '2',  TRUE),
+('시사·이슈',  '2',  TRUE),
+('IT트렌드',  '1',  TRUE),
+('인공지능',  '1',  FALSE),
+('UX',  '1',  FALSE),
+('인스타그램',  '1',  FALSE),
+('스마트폰',  '1',  FALSE),
+('안드로이드',  '1',  FALSE),
+('페이스북',  '1',  FALSE),
+('애플',  '1',  FALSE),
+('구글',  '1',  FALSE),
+('아이폰',  '1',  FALSE),
+('아이패드',  '1',  FALSE),
+('VR',  '1',  FALSE),
+('모바일',  '1',  FALSE),
+('사진·촬영',  '2',  TRUE),
+('취향저격 영화 리뷰',  '2',  TRUE),
+('오늘은 이런 책',  '2',  TRUE),
+('뮤직인사이드',  '2',  TRUE),
+('글쓰기 코치',  '2',  TRUE),
+('직장인 현실 조언',  '2',  TRUE),
+('스타트업 경험담',  '2',  TRUE),
+('육아 이야기',  '2',  TRUE),
+('요리·레시피',  '2',  TRUE),
+('건강·운동',  '2',  TRUE),
+('멘탈 관리 심리 탐구',  '2',  TRUE),
+('디자인스토리',  '2',  TRUE),
+('문화·예술',  '2',  TRUE),
+('건축·설계',  '2',  TRUE),
+('인문학·철학',  '2',  TRUE),
+('쉽게 읽는 역사',  '2',  TRUE),
+('우리집 반려동물',  '2',  TRUE),
+('멋진 캘리그래피',  '2',  TRUE),
+('사랑·이별',  '2',  TRUE),
+('감성에세이',  '2',  TRUE)
 ;
 
 -- insert user data
@@ -45,17 +75,11 @@ VALUES ("예술하는 척"
 -- insert book_post data
 INSERT INTO book_posts (post_id, book_id, sequence)
 VALUES
-(2, 1, 1)
+(1, 1, 1)
 ;
 
 -- insert user_keyword data
 INSERT INTO user_keywords (user_id, keyword_id)
 VALUES
 (1, 2)
-;
-
--- insert post_keyword data
-INSERT INTO post_keywords (post_id, keyword_id)
-VALUES
-(2, 2)
 ;
