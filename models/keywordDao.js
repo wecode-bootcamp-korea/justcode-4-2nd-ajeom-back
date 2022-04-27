@@ -2,8 +2,16 @@ const { PrismaClient } = require("@prisma/client");
 
 const prisma = new PrismaClient();
 
-// 메인 페이지에 표시 될 키워드 리스트
+// 전체 키워드 리스트
 const getKeywords = async () => {
+  return await prisma.$queryRaw`
+		SELECT id, name
+		FROM   keywords
+	`;
+};
+
+// 메인 페이지에 표시 될 키워드 리스트
+const getMainKeywords = async () => {
   return await prisma.$queryRaw`
 		SELECT name
 		FROM   keywords
@@ -43,6 +51,7 @@ const getRelatedKeywords = async (id, categoryId) => {
 
 module.exports = {
   getKeywords,
+  getMainKeywords,
   getCategoryId,
   getSelectedKeyword,
   getRelatedKeywords,
