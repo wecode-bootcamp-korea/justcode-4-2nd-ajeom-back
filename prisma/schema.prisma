@@ -16,7 +16,7 @@ model User {
   nickname        String
   profile_img_url String
   is_author       Boolean?
-  description     String?
+  description     String?  @db.VarChar(300)
   created_at      DateTime @default(now())
   updated_at      DateTime @default(now())
 
@@ -66,12 +66,12 @@ model Keyword {
 model Post {
   id            Int      @id @default(autoincrement())
   title         String
-  body          String
-  summary       String
+  body          String   @db.LongText
+  summary       String   @db.VarChar(300)
   subtitle      String
   user_id       Int
   is_published  Boolean
-  thumbnail_url String
+  thumbnail_url String   @db.VarChar(300)
   created_at    DateTime @default(now())
   updated_at    DateTime @default(now())
 
@@ -86,8 +86,8 @@ model Book {
   id            Int      @id @default(autoincrement())
   title         String
   user_id       String
-  bookcover_url String
-  description   String
+  bookcover_url String   @db.VarChar(300)
+  description   String   @db.VarChar(300)
   created_at    DateTime @default(now())
   updated_at    DateTime @default(now())
 
