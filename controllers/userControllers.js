@@ -46,8 +46,8 @@ const getAuthorProfile = async (req, res) => {
 const updateIsAuthor = async (req, res) => {
   try {
     const userId = req.userId;
-    const { desciption } = req.body;
-    const author = await userService.updateIsAuthor(userId, desciption);
+    const { description } = req.body;
+    const author = await userService.updateIsAuthor(userId, description);
     return res.status(201).json({ message: "SUCCESS" });
   } catch (err) {
     return res.status(400).json({ message: err.message });

@@ -75,9 +75,9 @@ const getAuthorProfile = async (userId) => {
   }
 };
 
-const updateIsAuthor = async (userId, desciption) => {
+const updateIsAuthor = async (userId, description) => {
   try {
-    return await userDao.updateIsAuthor(userId, desciption);
+    return await userDao.updateIsAuthor(userId, description);
   } catch (err) {
     console.log(err);
   }
