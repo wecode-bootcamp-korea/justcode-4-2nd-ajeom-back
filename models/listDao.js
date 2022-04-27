@@ -18,5 +18,5 @@ const getPostAmount = async (keywordId) => {
 
 module.exports = { getPostList, getPostAmount }
 
-// JOIN post_keywords ON post.id = post_keywords.post_id
+// JOIN post_keywords ON posts.id = post_keywords.post_id
 // WHERE post_keywords.keyword_id = ${keywordId}
