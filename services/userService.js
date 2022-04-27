@@ -6,20 +6,25 @@ const res = require("express/lib/response");
 const { response } = require("express");
 const YOUR_SECRET_KET = process.env.SECRET_KEY;
 
-const userCheck = async (data) => {
+
   //console.log(data)
-  const userInfo = await userDao.getUserImpormetion(data.id);
-  const TOKEN = jwt.sign({ ajeomId: userInfo[0].id }, YOUR_SECRET_KET);
-
-  if (userInfo.length == 0) {
-    const userImp = await userDao.createUser(
-      data.id,
-      data.properties.nickname,
-      data.properties.profile_image
-    );
-  }
-
-  return TOKEN;
+  const userCheck = async (data) => {
+    //console.log(data)
+    const user = await userDao.getUserImpormetion(data.id);
+  
+    if (user.length === 0) {
+      const userImp = await userDao.createUser(
+        data.id,
+        data.properties.nickname,
+        data.properties.profile_image
+      );
+    }
+    const userInfo = await userDao.getUserImpormetion(data.id);
+    const TOKEN = jwt.sign({ ajeomId: userInfo[0].id }, YOUR_SECRET_KET);
+    console.log("userService", TOKEN);
+  
+    return TOKEN;
+  
 };
 
 const signupAndLogin = async (access_token) => {
@@ -56,6 +61,14 @@ const getAuthorList = async () => {
     console.log(err);
   }
 };
+const getMyUserList =async () =>{
+  try{
+    return await userDao.getMyUserList();
+
+  }catch(err){
+    console.log(err);
+  }
+}
 
 const getAuthorProfile = async (userId) => {
   try {
@@ -69,5 +82,7 @@ module.exports = {
   signupAndLogin,
   getUserProfile,
   getAuthorList,
+  getMyUserList,
   getAuthorProfile,
+  
 };

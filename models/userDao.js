@@ -16,7 +16,7 @@ const createUser = async (kakao_id, nickname, profile_img_url) => {
 
 const getUserProfile = async (userId) => {
   return await prisma.$queryRaw`
-        SELECT id, nickname, is_author, description, profile_img_url FROM users WHERE id = ${userId};
+      SELECT id, nickname, is_author, description, profile_img_url FROM users WHERE id = ${userId};
     `;
 };
 

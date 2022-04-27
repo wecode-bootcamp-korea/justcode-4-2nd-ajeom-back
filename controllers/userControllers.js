@@ -33,6 +33,8 @@ const getAuthorList = async (req, res) => {
   }
 };
 
+const getMyUserList = async(req,res) =>{}
+
 const getAuthorProfile = async (req, res) => {
   try {
     const userId = req.params.author_id;
@@ -47,5 +49,6 @@ module.exports = {
   signupAndLogin,
   getUserProfile,
   getAuthorList,
+  getMyUserList,
   getAuthorProfile,
 };
