@@ -10,15 +10,25 @@ const postBook = async (title,user_id,bookcover_url,description,postIdList) => {
     console.log(err);
   }
 };
-const getBook = async (title,user_id,bookcover_url,description,postIdList) => {
+const getBook = async (id) => {
   try {
 
-     await bookDao.postBook(title,user_id,bookcover_url,description,postIdList);
-    return;
+     const bookData= await bookDao.getBook(id);
+    return bookData;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const getBook_postList = async (id) => {
+  try {
+
+     const postList= await bookDao.getBook_postList(id);
+    return postList;
   } catch (err) {
     console.log(err);
   }
 };
 module.exports = {
-    postBook,getBook
+    postBook,getBook,getBook_postList
 };
