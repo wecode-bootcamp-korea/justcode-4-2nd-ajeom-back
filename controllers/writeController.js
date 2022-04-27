@@ -3,7 +3,6 @@ writeService = require("../services/writeService");
 // 글 클릭 시 detail 페이지에서 사용할 API
 const createPost = async (req, res) => {
   try {
-    console.log("controller start");
     const {
       title,
       body,

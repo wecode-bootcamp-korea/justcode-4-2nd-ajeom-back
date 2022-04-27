@@ -9,7 +9,6 @@ const createPost = async (
   isPublished,
   thumbnailUrl
 ) => {
-  console.log("service start");
   const newPost = await writeDao.createPost(
     title,
     body,
