@@ -38,4 +38,17 @@ const delPost = async (req, res) => {
   }
 };
 
-module.exports = { createPost ,delPost};
+const getPost = async (req, res) => {
+  try {
+  const user_id=req.userId;
+  const offset =req.query.offset
+  const limit=req.query.limit
+  console.log(limit)
+    const postlist= await writeService.getPost(user_id,offset,limit);
+    return res.status(200).json({PostList:postlist});
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+module.exports = { createPost ,delPost,getPost};

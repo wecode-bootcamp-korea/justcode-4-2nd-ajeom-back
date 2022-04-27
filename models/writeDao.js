@@ -47,4 +47,17 @@ const delPost =  async (id,user_id) => {
   ;
   return ;
   }
-module.exports = { createPost,delPost  };
+
+  const getPost =  async (user_id,offset,limit) => {
+    const start=(offset-1)*limit+1;
+
+console.log(user_id)
+	return	await prisma.$queryRaw` 
+	SELECT id, title AS Title, summary AS Summary, user_id, thumbnail_url AS post_thumbnail_url, created_at
+	FROM posts
+	WHERE posts.user_id = ${user_id}
+	LIMIT ${start}, ${limit};`;
+  ;
+
+  }
+module.exports = { createPost,delPost ,getPost  };

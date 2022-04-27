@@ -29,5 +29,14 @@ const delPost = async (id,user_id) => {
     console.log(err);
   }
 };
+const getPost = async (user_id,offset,limit) => {
+  try {
 
-module.exports = { createPost,delPost };
+    const postList=  await writeDao.getPost(user_id,offset,limit);
+    return postList;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+module.exports = { createPost,delPost,getPost };
