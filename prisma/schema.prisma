@@ -22,6 +22,7 @@ model User {
 
   userKeyword UserKeyword[]
   post        Post[]
+
   @@map("users")
 }
 
@@ -35,8 +36,7 @@ model UserKeyword {
   users    User    @relation(fields: [user_id], references: [id])
   keywords Keyword @relation(fields: [keyword_id], references: [id])
 
-
-  @@map("user_Keyword")
+  @@map("user_keywords")
 }
 
 model Category {
@@ -61,7 +61,7 @@ model Keyword {
   userkeyword UserKeyword[]
   postkeyword postKeyword[]
 
-  keywords Category @relation(fields: [category_id], references: [id])
+  categories Category @relation(fields: [category_id], references: [id])
 
   @@map("keywords")
 }
@@ -69,11 +69,11 @@ model Keyword {
 model Post {
   id            Int      @id @default(autoincrement())
   title         String
-  body          String?
+  body          String
   summary       String
-  subtitle      String?
+  subtitle      String
   user_id       Int
-  is_publiced   Boolean?
+  is_published  Boolean
   thumbnail_url String
   created_at    DateTime @default(now())
   updated_at    DateTime @default(now())
@@ -86,11 +86,13 @@ model Post {
 }
 
 model Book {
-  id         Int      @id @default(autoincrement())
-  title      String
-  user_id    String
-  created_at DateTime @default(now())
-  updated_at DateTime @default(now())
+  id            Int      @id @default(autoincrement())
+  title         String
+  user_id       String
+  bookcover_url String
+  description   String
+  created_at    DateTime @default(now())
+  updated_at    DateTime @default(now())
 
   bookpost BookPost[]
 
