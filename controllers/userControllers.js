@@ -7,7 +7,7 @@ const signupAndLogin = async (req, res) => {
     const lastToken = await userService.signupAndLogin(access_token);
     console.log(lastToken);
 
-    return lastToken;
+    return res.status(200).json({ token: lastToken });
   } catch (err) {
     console.log(err);
   }
@@ -43,9 +43,21 @@ const getAuthorProfile = async (req, res) => {
   }
 };
 
+const updateIsAuthor = async (req, res) => {
+  try {
+    const userId = req.userId;
+    const { description } = req.body;
+    const author = await userService.updateIsAuthor(userId, description);
+    return res.status(201).json({ message: "SUCCESS" });
+  } catch (err) {
+    return res.status(400).json({ message: err.message });
+  }
+};
+
 module.exports = {
   signupAndLogin,
   getUserProfile,
   getAuthorList,
   getAuthorProfile,
+  updateIsAuthor,
 };
