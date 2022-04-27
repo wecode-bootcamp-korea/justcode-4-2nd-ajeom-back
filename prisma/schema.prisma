@@ -20,8 +20,9 @@ model User {
   created_at      DateTime @default(now())
   updated_at      DateTime @default(now())
 
-  userKeyword UserKeyword[]
-  post        Post[]
+
+  UserKeyword UserKeyword[]
+  Post        Post[]
   @@map("users")
 }
 
@@ -34,8 +35,6 @@ model UserKeyword {
 
   users    User    @relation(fields: [user_id], references: [id])
   keywords Keyword @relation(fields: [keyword_id], references: [id])
-
-
   @@map("user_keywords")
 }
 
@@ -45,8 +44,7 @@ model Category {
   created_at DateTime @default(now())
   updated_at DateTime @default(now())
 
-  keyword Keyword[]
-
+  Keyword Keyword[]
   @@map("categories")
 }
 
@@ -58,11 +56,10 @@ model Keyword {
   created_at  DateTime @default(now())
   updated_at  DateTime @default(now())
 
-  userkeyword UserKeyword[]
-  postkeyword postKeyword[]
+  categories Category @relation(fields: [category_id], references: [id])
 
-  keywords Category @relation(fields: [category_id], references: [id])
-
+  UserKeyword UserKeyword[]
+  PostKeyword PostKeyword[]
   @@map("keywords")
 }
 
@@ -78,10 +75,10 @@ model Post {
   created_at    DateTime @default(now())
   updated_at    DateTime @default(now())
 
-  postkeyword postKeyword[]
-  bookpost    BookPost[]
-  users       User          @relation(fields: [user_id], references: [id])
+  users User @relation(fields: [user_id], references: [id])
 
+  PostKeyword PostKeyword[]
+  BookPost    BookPost[]
   @@map("posts")
 }
 
@@ -94,8 +91,7 @@ model Book {
   created_at    DateTime @default(now())
   updated_at    DateTime @default(now())
 
-  bookpost BookPost[]
-
+  BookPost BookPost[]
   @@map("books")
 }
 
@@ -109,11 +105,10 @@ model BookPost {
 
   books Book @relation(fields: [book_id], references: [id])
   posts Post @relation(fields: [post_id], references: [id])
-
   @@map("book_posts")
 }
 
-model postKeyword {
+model PostKeyword {
   id         Int      @id @default(autoincrement())
   post_id    Int
   keyword_id Int
@@ -122,6 +117,5 @@ model postKeyword {
 
   posts    Post    @relation(fields: [post_id], references: [id])
   keywords Keyword @relation(fields: [keyword_id], references: [id])
-
   @@map("post_keywords")
 }
