@@ -8,16 +8,26 @@ const YOUR_SECRET_KET = process.env.SECRET_KEY;
 
 const userCheck = async (data) => {
   //console.log(data)
+  const user = await userDao.getUserImpormetion(data.id);
+
+  if (user.length === 0) {
+    if (data.properties.profile_image) {
+      const userImp = await userDao.createUser(
+        data.id,
+        data.properties.nickname,
+        data.properties.profile_image
+      );
+    } else {
+      const userImp = await userDao.createUser(
+        data.id,
+        data.properties.nickname,
+        null
+      );
+    }
+  }
   const userInfo = await userDao.getUserImpormetion(data.id);
   const TOKEN = jwt.sign({ ajeomId: userInfo[0].id }, YOUR_SECRET_KET);
-
-  if (userInfo.length == 0) {
-    const userImp = await userDao.createUser(
-      data.id,
-      data.properties.nickname,
-      data.properties.profile_image
-    );
-  }
+  // console.log("userService", TOKEN);
 
   return TOKEN;
 };
