@@ -9,9 +9,9 @@ const createPost = async (
   subtitle,
   userId,
   isPublished,
-  thumbnailUrl
+  thumbnailUrl,keywordIdList
 ) => {
-  return await prisma.$queryRaw`
+await prisma.$queryRaw`
 		INSERT INTO posts(title, body, summary, subtitle, user_id, is_published, thumbnail_url)
 		VALUES (
 			${title}
@@ -23,6 +23,19 @@ const createPost = async (
 		, ${thumbnailUrl}
 		)
 	`;
+
+	const [post_id] = await prisma.$queryRaw`
+SELECT *
+FROM posts
+ORDER BY id DESC
+LIMIT 1`;
+console.log(post_id.id)
+	for(i=0;i<keywordIdList.length;i++){
+		await prisma.$queryRaw`
+		INSERT INTO post_keywords (post_id,keyword_id) VALUES
+	  (${post_id.id},${keywordIdList[i]});`;
+	}
+	return;
 };
 
 module.exports = { createPost };

@@ -8,18 +8,18 @@ const createPost = async (req, res) => {
       body,
       summary,
       subtitle,
-      userId,
       isPublished,
       thumbnailUrl,
+      keywordIdList
     } = req.body;
     await writeService.createPost(
       title,
       body,
       summary,
       subtitle,
-      userId,
+      req.userId,
       isPublished,
-      thumbnailUrl
+      thumbnailUrl,keywordIdList
     );
 
     res.status(200).json({ message: "POSTING_SUCCESS" });

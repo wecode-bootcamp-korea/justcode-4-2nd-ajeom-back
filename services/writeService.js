@@ -7,7 +7,7 @@ const createPost = async (
   subtitle,
   userId,
   isPublished,
-  thumbnailUrl
+  thumbnailUrl,keywordIdList
 ) => {
   const newPost = await writeDao.createPost(
     title,
@@ -16,7 +16,7 @@ const createPost = async (
     subtitle,
     userId,
     isPublished,
-    thumbnailUrl
+    thumbnailUrl,keywordIdList
   );
   return newPost;
 };
