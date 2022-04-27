@@ -68,7 +68,7 @@ model Post {
   title         String
   body          String
   summary       String
-  subtitle      String
+  subtitle      String 
   user_id       Int
   is_published  Boolean
   thumbnail_url String
