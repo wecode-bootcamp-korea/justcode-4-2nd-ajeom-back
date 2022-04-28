@@ -53,11 +53,24 @@ const updateIsAuthor = async (req, res) => {
     return res.status(400).json({ message: err.message });
   }
 };
+ 
+const getAuthorBookList = async (req, res) =>{
+  try{
+    const user_id = req.userId
+    const authorBookList = await userService.getAuthorBookList(user_id);
+    return res.status(201).json({authorBookList});
+
+  }catch(err){
+    return res.status(400).json({message:err.message})
+
+  }
+}
 
 module.exports = {
   signupAndLogin,
   getUserProfile,
   getAuthorList,
-  getAuthorProfile,
+  getAuthorBookList,
   updateIsAuthor,
+  getAuthorProfile,
 };

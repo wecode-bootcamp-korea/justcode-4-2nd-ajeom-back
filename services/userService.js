@@ -6,30 +6,25 @@ const res = require("express/lib/response");
 const { response } = require("express");
 const YOUR_SECRET_KET = process.env.SECRET_KEY;
 
-const userCheck = async (data) => {
-  //console.log(data)
-  const user = await userDao.getUserImpormetion(data.id);
 
-  if (user.length === 0) {
-    if (data.properties.profile_image) {
+
+  const userCheck = async (data) => {
+    //console.log(data)
+    const user = await userDao.getUserImpormetion(data.id);
+  
+    if (user.length === 0) {
       const userImp = await userDao.createUser(
         data.id,
         data.properties.nickname,
         data.properties.profile_image
       );
-    } else {
-      const userImp = await userDao.createUser(
-        data.id,
-        data.properties.nickname,
-        "https://raw.githubusercontent.com/nsoarim/nsoarim.github.io/main/ajeom_logo.png"
-      );
     }
-  }
-  const userInfo = await userDao.getUserImpormetion(data.id);
-  const TOKEN = jwt.sign({ ajeomId: userInfo[0].id }, YOUR_SECRET_KET);
-  // console.log("userService", TOKEN);
-
-  return TOKEN;
+    const userInfo = await userDao.getUserImpormetion(data.id);
+    const TOKEN = jwt.sign({ ajeomId: userInfo[0].id }, YOUR_SECRET_KET);
+    console.log("userService", TOKEN);
+  
+    return TOKEN;
+  
 };
 
 const signupAndLogin = async (access_token) => {
@@ -67,6 +62,7 @@ const getAuthorList = async () => {
   }
 };
 
+
 const getAuthorProfile = async (userId) => {
   try {
     return await userDao.getUserProfile(userId);
@@ -83,10 +79,21 @@ const updateIsAuthor = async (userId, description) => {
   }
 };
 
+const getAuthorBookList =async(userId) =>{
+  try{
+
+    return await userDao.getAuthorBookList(userId);
+  }catch(err){
+    console.log(err);
+  }
+}
+
 module.exports = {
   signupAndLogin,
   getUserProfile,
   getAuthorList,
   getAuthorProfile,
   updateIsAuthor,
+  getAuthorBookList
+  
 };
