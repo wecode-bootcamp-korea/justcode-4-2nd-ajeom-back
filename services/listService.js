@@ -1,19 +1,19 @@
-const listDao = require('../models/listDao')
+const listDao = require("../models/listDao");
 
 const getPostList = async (page, pageSize, keywordId) => {
   try {
     let start = 0;
-    page <= 0 ? page = 1 : start = (page - 1) * pageSize
+    page <= 0 ? (page = 1) : (start = (page - 1) * pageSize);
 
-    const getPostAmount = await listDao.getPostAmount(keywordId)
-    const maxPage = Math.round((getPostAmount.length)/pageSize)
+    const getPostAmount = await listDao.getPostAmount(keywordId);
+    const maxPage = Math.ceil(getPostAmount.length / pageSize);
     if (page > maxPage) return null;
 
-    const getPostList = await listDao.getPostList(start, pageSize, keywordId)
+    const getPostList = await listDao.getPostList(start, pageSize, keywordId);
     return getPostList;
   } catch (err) {
     throw err;
   }
-}
+};
 
-module.exports = { getPostList }
+module.exports = { getPostList };
