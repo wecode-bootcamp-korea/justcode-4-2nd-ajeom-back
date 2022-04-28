@@ -3,7 +3,7 @@ CREATE TABLE `users` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `kakao_id` VARCHAR(191) NOT NULL,
     `nickname` VARCHAR(191) NOT NULL,
-    `profile_img_url` VARCHAR(191) NOT NULL,
+    `profile_img_url` VARCHAR(191) NULL,
     `is_author` BOOLEAN NULL,
     `description` VARCHAR(191) NULL,
     `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
@@ -14,7 +14,7 @@ CREATE TABLE `users` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `user_Keyword` (
+CREATE TABLE `user_keywords` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `user_id` INTEGER NOT NULL,
     `keyword_id` INTEGER NOT NULL,
@@ -55,10 +55,9 @@ CREATE TABLE `posts` (
     `body` VARCHAR(191) NOT NULL,
     `summary` VARCHAR(191) NOT NULL,
     `subtitle` VARCHAR(191) NOT NULL,
-    `keyword_id` INTEGER NOT NULL,
     `user_id` INTEGER NOT NULL,
-    `is_publiced` BOOLEAN NOT NULL,
-    `thumbanil_url` VARCHAR(191) NOT NULL,
+    `is_published` BOOLEAN NOT NULL,
+    `thumbnail_url` VARCHAR(191) NOT NULL,
     `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updated_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
 
@@ -70,6 +69,8 @@ CREATE TABLE `books` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `title` VARCHAR(191) NOT NULL,
     `user_id` VARCHAR(191) NOT NULL,
+    `bookcover_url` VARCHAR(191) NOT NULL,
+    `description` VARCHAR(191) NOT NULL,
     `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updated_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
 
@@ -100,10 +101,10 @@ CREATE TABLE `post_keywords` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- AddForeignKey
-ALTER TABLE `user_Keyword` ADD CONSTRAINT `user_Keyword_user_id_fkey` FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `user_keywords` ADD CONSTRAINT `user_keywords_user_id_fkey` FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `user_Keyword` ADD CONSTRAINT `user_Keyword_keyword_id_fkey` FOREIGN KEY (`keyword_id`) REFERENCES `keywords`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `user_keywords` ADD CONSTRAINT `user_keywords_keyword_id_fkey` FOREIGN KEY (`keyword_id`) REFERENCES `keywords`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `keywords` ADD CONSTRAINT `keywords_category_id_fkey` FOREIGN KEY (`category_id`) REFERENCES `categories`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;

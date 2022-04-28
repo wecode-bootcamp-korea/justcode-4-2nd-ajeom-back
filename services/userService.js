@@ -11,23 +11,15 @@ const userCheck = async (data) => {
   const user = await userDao.getUserImpormetion(data.id);
 
   if (user.length === 0) {
-    if (data.properties.profile_image) {
-      const userImp = await userDao.createUser(
-        data.id,
-        data.properties.nickname,
-        data.properties.profile_image
-      );
-    } else {
-      const userImp = await userDao.createUser(
-        data.id,
-        data.properties.nickname,
-        "https://raw.githubusercontent.com/nsoarim/nsoarim.github.io/main/ajeom_logo.png"
-      );
-    }
+    const userImp = await userDao.createUser(
+      data.id,
+      data.properties.nickname,
+      data.properties.profile_image
+    );
   }
   const userInfo = await userDao.getUserImpormetion(data.id);
   const TOKEN = jwt.sign({ ajeomId: userInfo[0].id }, YOUR_SECRET_KET);
-  // console.log("userService", TOKEN);
+  console.log("userService", TOKEN);
 
   return TOKEN;
 };
@@ -90,6 +82,13 @@ const getAuthorBookList = async (userId) => {
     console.log(err);
   }
 };
+const getOtherBookList = async (userId) => {
+  try {
+    return await userDao.getOtherBookList(userId);
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 module.exports = {
   signupAndLogin,
@@ -97,5 +96,6 @@ module.exports = {
   getAuthorList,
   getAuthorProfile,
   updateIsAuthor,
+  getOtherBookList,
   getAuthorBookList,
 };

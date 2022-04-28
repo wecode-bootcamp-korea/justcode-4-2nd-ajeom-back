@@ -56,8 +56,18 @@ const updateIsAuthor = async (req, res) => {
 
 const getAuthorBookList = async (req, res) => {
   try {
+    const user_id = req.userId;
+    const authorBookList = await userService.getAuthorBookList(user_id);
+    return res.status(201).json({ authorBookList });
+  } catch (err) {
+    return res.status(400).json({ message: err.message });
+  }
+};
+
+const getOtherBookList = async (req, res) => {
+  try {
     const userId = req.params.author_id;
-    const authorBrunchBook = await userService.getAuthorBookList(userId);
+    const authorBrunchBook = await userService.getOtherBookList(userId);
     return res.status(201).json({ authorBrunchBook });
   } catch (err) {
     return res.status(400).json({ message: err.message });
@@ -68,7 +78,8 @@ module.exports = {
   signupAndLogin,
   getUserProfile,
   getAuthorList,
-  getAuthorProfile,
-  updateIsAuthor,
   getAuthorBookList,
+  updateIsAuthor,
+  getAuthorProfile,
+  getOtherBookList,
 };
