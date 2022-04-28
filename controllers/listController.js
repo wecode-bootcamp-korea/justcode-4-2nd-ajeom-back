@@ -23,10 +23,10 @@ const getDrawerPostList = async (req, res) => {
   const postListInfo = req.query;
   const page = parseInt(postListInfo.page);
   const pageSize = parseInt(postListInfo.pageSize);
-  const userId = req.params.id;
+  const userId = req.userId;
 
   try {
-    if (!postListInfo || !pageSize) {
+    if (!postListInfo || !pageSize || (userId === undefined)) {
       res.status(400).json({message:"NULL VALUE"});
     }
     const getDrawerPostList = await listService.getDrawerPostList(page, pageSize, userId)
