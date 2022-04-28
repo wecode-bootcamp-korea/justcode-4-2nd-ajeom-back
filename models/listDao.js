@@ -5,6 +5,7 @@ const getPostList = async (start, pageSize, keywordId) => {
   return await prisma.$queryRaw`
   SELECT id, title, summary, user_id, thumbnail_url, created_at
   FROM posts
+  order by id desc
   LIMIT ${start}, ${pageSize};
   `
 }
