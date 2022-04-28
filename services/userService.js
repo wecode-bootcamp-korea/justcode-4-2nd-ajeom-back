@@ -7,7 +7,7 @@ const { response } = require("express");
 const YOUR_SECRET_KET = process.env.SECRET_KEY;
 
 
-  //console.log(data)
+
   const userCheck = async (data) => {
     //console.log(data)
     const user = await userDao.getUserImpormetion(data.id);
@@ -61,14 +61,7 @@ const getAuthorList = async () => {
     console.log(err);
   }
 };
-const getMyUserList =async () =>{
-  try{
-    return await userDao.getMyUserList();
 
-  }catch(err){
-    console.log(err);
-  }
-}
 
 const getAuthorProfile = async (userId) => {
   try {
@@ -77,12 +70,19 @@ const getAuthorProfile = async (userId) => {
     console.log(err);
   }
 };
+const getAuthorBookList =async() =>{
+  try{
+    return await userDao.getAuthorBookList();
+  }catch(err){
+    console.log(err);
+  }
+}
 
 module.exports = {
   signupAndLogin,
   getUserProfile,
   getAuthorList,
-  getMyUserList,
   getAuthorProfile,
+  getAuthorBookList
   
 };

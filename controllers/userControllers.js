@@ -33,7 +33,7 @@ const getAuthorList = async (req, res) => {
   }
 };
 
-const getMyUserList = async(req,res) =>{}
+
 
 const getAuthorProfile = async (req, res) => {
   try {
@@ -44,11 +44,23 @@ const getAuthorProfile = async (req, res) => {
     return res.status(400).json({ message: err.message });
   }
 };
+ 
+const getAuthorBookList = async (req, res) =>{
+  try{
+
+    const authorBookList = await userService.getAuthorBookList();
+    return res.status(201).json({authorBookList});
+
+  }catch(err){
+    return res.status(400).json({message:err.message})
+
+  }
+}
 
 module.exports = {
   signupAndLogin,
   getUserProfile,
   getAuthorList,
-  getMyUserList,
+  getAuthorBookList,
   getAuthorProfile,
 };
