@@ -17,6 +17,7 @@ router.get(
 
 router.post("/login", userController.signupAndLogin);
 router.get("/authorList", userController.getAuthorList);
+
 router.get("/authorProfile/:author_id", userController.getAuthorProfile);
 router.post(
   "/authorRequest",

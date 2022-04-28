@@ -66,9 +66,11 @@ const getAuthorBookList = async (req, res) => {
 
 const getOtherBookList = async (req, res) => {
   try {
+    
     const userId = req.params.author_id;
-    const authorBrunchBook = await userService.getOtherBookList(userId);
-    return res.status(201).json({ authorBrunchBook });
+    const authorBrunchBook = await userService.getAuthorBookList(userId);
+    console.log(userId)
+    return res.status(201).json(authorBrunchBook);
   } catch (err) {
     return res.status(400).json({ message: err.message });
   }
