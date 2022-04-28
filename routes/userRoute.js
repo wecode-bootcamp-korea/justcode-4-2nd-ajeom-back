@@ -17,5 +17,6 @@ router.post(
   authorizedUser.getUserIdByVerifyToken,
   userController.updateIsAuthor
 );
+router.get("/authorBruchBook/:author_id", userController.getAuthorBookList);
 
 module.exports = router;

@@ -54,10 +54,21 @@ const updateIsAuthor = async (req, res) => {
   }
 };
 
+const getAuthorBookList = async (req, res) => {
+  try {
+    const userId = req.params.author_id;
+    const authorBrunchBook = await userService.getAuthorBookList(userId);
+    return res.status(201).json({ authorBrunchBook });
+  } catch (err) {
+    return res.status(400).json({ message: err.message });
+  }
+};
+
 module.exports = {
   signupAndLogin,
   getUserProfile,
   getAuthorList,
   getAuthorProfile,
   updateIsAuthor,
+  getAuthorBookList,
 };

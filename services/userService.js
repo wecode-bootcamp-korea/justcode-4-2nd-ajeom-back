@@ -83,10 +83,19 @@ const updateIsAuthor = async (userId, description) => {
   }
 };
 
+const getAuthorBookList = async (userId) => {
+  try {
+    return await userDao.getAuthorBookList(userId);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 module.exports = {
   signupAndLogin,
   getUserProfile,
   getAuthorList,
   getAuthorProfile,
   updateIsAuthor,
+  getAuthorBookList,
 };

@@ -13,7 +13,7 @@ const getKeywords = async () => {
 // 메인 페이지에 표시 될 키워드 리스트
 const getMainKeywords = async () => {
   return await prisma.$queryRaw`
-		SELECT name
+		SELECT id, name
 		FROM   keywords
 		WHERE  is_main = 1;
 	`;
@@ -31,7 +31,7 @@ const getCategoryId = async (id) => {
 // 선택된 키워드
 const getSelectedKeyword = async (id) => {
   return await prisma.$queryRaw`
-		SELECT name 
+		SELECT id, name 
 		FROM   keywords
 		WHERE  id=${id};
 	`;
@@ -40,7 +40,7 @@ const getSelectedKeyword = async (id) => {
 // 같은 카테고리 키워드 중 선택된 키워드를 제외한 키워드 리스트
 const getRelatedKeywords = async (id, categoryId) => {
   return await prisma.$queryRaw`
-		SELECT name
+		SELECT id, name
 		FROM (
 			SELECT id, name, category_id, is_main
 			FROM   keywords
