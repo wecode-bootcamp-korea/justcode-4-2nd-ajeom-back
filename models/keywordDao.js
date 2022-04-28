@@ -13,7 +13,7 @@ const getKeywords = async () => {
 // 메인 페이지에 표시 될 키워드 리스트
 const getMainKeywords = async () => {
   return await prisma.$queryRaw`
-		SELECT name
+		SELECT id,name
 		FROM   keywords
 		WHERE  is_main = 1;
 	`;
