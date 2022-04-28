@@ -23,9 +23,10 @@ const getPostAmount = async (keywordId) => {
 
 //list at Drawer
 const getDrawerPostList = async (start, pageSize, userId) => {
+  console.log(userId)
   return await prisma.$queryRaw`
   SELECT posts.id, title, summary, thumbnail_url, created_at
-  FROM posts WHERE is_published = 0; AND user_id = ${userId}
+  FROM posts WHERE is_published = 0 AND user_id = ${userId}
   LIMIT ${start}, ${pageSize};
   `
 }
@@ -33,7 +34,7 @@ const getDrawerPostList = async (start, pageSize, userId) => {
 const getDrawerPostAmount = async (userId) => {
   return await prisma.$queryRaw`
   SELECT id FROM posts
-  WHERE is_published = 0; AND user_id = ${userId};
+  WHERE is_published = 0 AND user_id = ${userId};
   `
 }
 
@@ -41,7 +42,7 @@ const getDrawerPostAmount = async (userId) => {
 const getProfilePostList = async (start, pageSize, userId) => {
   return await prisma.$queryRaw`
   SELECT posts.id, title, summary, thumbnail_url, created_at FROM posts
-  WHERE is_published = 1; AND user_id = ${userId}
+  WHERE is_published = 1 AND user_id = ${userId}
   LIMIT ${start}, ${pageSize};
   `
 }
@@ -49,7 +50,7 @@ const getProfilePostList = async (start, pageSize, userId) => {
 const getProfilePostAmount = async (userId) => {
   return await prisma.$queryRaw`
   SELECT id FROM posts
-  WHERE is_published = 1; AND user_id = ${userId};
+  WHERE is_published = 1 AND user_id = ${userId};
   `
 }
 
