@@ -7,7 +7,7 @@ const signupAndLogin = async (req, res) => {
     const lastToken = await userService.signupAndLogin(access_token);
     console.log(lastToken);
 
-    return lastToken;
+    return res.status(200).json({ token: lastToken });
   } catch (err) {
     console.log(err);
   }
@@ -33,8 +33,6 @@ const getAuthorList = async (req, res) => {
   }
 };
 
-
-
 const getAuthorProfile = async (req, res) => {
   try {
     const userId = req.params.author_id;
@@ -44,11 +42,22 @@ const getAuthorProfile = async (req, res) => {
     return res.status(400).json({ message: err.message });
   }
 };
+
+const updateIsAuthor = async (req, res) => {
+  try {
+    const userId = req.userId;
+    const { description } = req.body;
+    const author = await userService.updateIsAuthor(userId, description);
+    return res.status(201).json({ message: "SUCCESS" });
+  } catch (err) {
+    return res.status(400).json({ message: err.message });
+  }
+};
  
 const getAuthorBookList = async (req, res) =>{
   try{
-
-    const authorBookList = await userService.getAuthorBookList();
+    const user_id = req.userId
+    const authorBookList = await userService.getAuthorBookList(user_id);
     return res.status(201).json({authorBookList});
 
   }catch(err){
@@ -62,5 +71,6 @@ module.exports = {
   getUserProfile,
   getAuthorList,
   getAuthorBookList,
+  updateIsAuthor,
   getAuthorProfile,
 };

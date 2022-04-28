@@ -70,9 +70,19 @@ const getAuthorProfile = async (userId) => {
     console.log(err);
   }
 };
-const getAuthorBookList =async() =>{
+
+const updateIsAuthor = async (userId, description) => {
+  try {
+    return await userDao.updateIsAuthor(userId, description);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const getAuthorBookList =async(userId) =>{
   try{
-    return await userDao.getAuthorBookList();
+
+    return await userDao.getAuthorBookList(userId);
   }catch(err){
     console.log(err);
   }
@@ -83,6 +93,7 @@ module.exports = {
   getUserProfile,
   getAuthorList,
   getAuthorProfile,
+  updateIsAuthor,
   getAuthorBookList
   
 };
