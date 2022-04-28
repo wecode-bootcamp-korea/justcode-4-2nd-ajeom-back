@@ -22,7 +22,7 @@ const getDrawerPostList = async (page, pageSize, userId) => {
     let start = 0;
     page <= 0 ? page = 1 : start = (page - 1) * pageSize
 
-    const getDrawerPostAmount = await listDao.getDrawerPostList(userId)
+    const getDrawerPostAmount = await listDao.getDrawerPostAmount(userId)
     const maxPage = Math.ceil((getDrawerPostAmount.length)/pageSize)
     if (page > maxPage) return null;
 
