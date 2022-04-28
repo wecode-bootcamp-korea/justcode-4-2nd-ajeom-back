@@ -9,6 +9,7 @@ const getPostList = async (start, pageSize, keywordId) => {
   JOIN users ON posts.user_id = users.id
   JOIN post_keywords ON posts.id = post_keywords.post_id
   WHERE post_keywords.keyword_id = ${keywordId} AND posts.is_published = 1
+  order by id desc
   LIMIT ${start}, ${pageSize};
   `
 }
