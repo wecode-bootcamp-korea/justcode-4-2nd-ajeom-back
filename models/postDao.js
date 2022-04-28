@@ -2,15 +2,13 @@ const { PrismaClient } = require("@prisma/client");
 
 const prisma = new PrismaClient();
 
-const getPost = async () => {
+const getPost = async (id) => {
   return await prisma.$queryRaw`
-		SELECT
-			title
-			, body
-			, summary
-			, subtitle
-			, thumbnail_url
-		FROM posts;
+		SELECT p.id, title, subtitle, body, thumbnail_url, u.nickname
+		FROM   posts p
+		JOIN   users u
+		ON     p.user_id = u.id
+		WHERE  p.id = ${id};
 	`;
 };
 
