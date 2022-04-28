@@ -21,7 +21,7 @@ const userCheck = async (data) => {
       const userImp = await userDao.createUser(
         data.id,
         data.properties.nickname,
-        null
+        "https://raw.githubusercontent.com/nsoarim/nsoarim.github.io/main/ajeom_logo.png"
       );
     }
   }
