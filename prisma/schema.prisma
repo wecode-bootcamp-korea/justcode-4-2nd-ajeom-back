@@ -14,7 +14,7 @@ model User {
   id              Int      @id @default(autoincrement())
   kakao_id        String   @unique
   nickname        String
-  profile_img_url String
+  profile_img_url String?
   is_author       Boolean?
   description     String?  @db.VarChar(300)
   created_at      DateTime @default(now())

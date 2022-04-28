@@ -4,14 +4,14 @@ const prisma = new PrismaClient();
 
 const getUserImpormetion = async (kakao_id) => {
   return await prisma.$queryRaw`
-         SELECT id FROM users WHERE kakao_id = ${kakao_id};
-     `;
+        SELECT id FROM users WHERE kakao_id = ${kakao_id};
+    `;
 };
 
 const createUser = async (kakao_id, nickname, profile_img_url) => {
   return await prisma.$queryRaw`
-         INSERT INTO users (kakao_id,nickname,profile_img_url) VALUES (${kakao_id}, ${nickname}, ${profile_img_url})
-   `;
+        INSERT INTO users (kakao_id,nickname,profile_img_url) VALUES (${kakao_id}, ${nickname}, ${profile_img_url})
+    `;
 };
 
 const getUserProfile = async (userId) => {
@@ -25,9 +25,16 @@ const getAuthorList = async () => {
     SELECT id, nickname, description, profile_img_url FROM users WHERE is_author = 1;`;
 };
 
+const updateIsAuthor = async (userId, description) => {
+  return await prisma.$queryRaw`
+    UPDATE users SET description = ${description}, is_author = 1 WHERE id = ${userId};`;
+};
+
 module.exports = {
   getUserImpormetion,
   createUser,
   getUserProfile,
   getAuthorList,
+  updateIsAuthor,
 };
+
