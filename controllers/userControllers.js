@@ -56,9 +56,10 @@ const updateIsAuthor = async (req, res) => {
  
 const getAuthorBookList = async (req, res) =>{
   try{
+    
     const user_id = req.userId
     const authorBookList = await userService.getAuthorBookList(user_id);
-    return res.status(201).json({authorBookList});
+    return res.status(201).json(authorBookList);
 
   }catch(err){
     return res.status(400).json({message:err.message})
