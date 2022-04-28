@@ -3,7 +3,6 @@ const router = express.Router();
 const authorizedUser = require("../middlewares/authorization");
 const userController = require("../controllers/userControllers");
 
-
 router.get(
   "/myProfile",
   authorizedUser.getUserIdByVerifyToken,
@@ -24,5 +23,6 @@ router.post(
   authorizedUser.getUserIdByVerifyToken,
   userController.updateIsAuthor
 );
+router.get("/authorBruchBook/:author_id", userController.getOtherBookList);
 
 module.exports = router;
