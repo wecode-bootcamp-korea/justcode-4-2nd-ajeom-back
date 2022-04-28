@@ -6,8 +6,6 @@ const getPostList = async (req, res) => {
   const pageSize = parseInt(postListInfo.pageSize);
   const keywordId = req.params.id;
 
-  console.log("controller");
-
   try {
     if (!postListInfo || !pageSize) {
       res.status(400).json({ message: "NULL VALUE" });
