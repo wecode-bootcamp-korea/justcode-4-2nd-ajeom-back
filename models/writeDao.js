@@ -49,15 +49,33 @@ const delPost =  async (id,user_id) => {
   }
 
   const getPost =  async (user_id,offset,limit) => {
-    const start=(offset-1)*limit+1;
 
-console.log(user_id)
+
+	let count=  await prisma.$queryRaw` 
+	SELECT COUNT(id) AS C FROM posts where user_id= ${user_id};`;
+    count= count[0].C;
+
+
+	if(count> limit){
+    const start=(offset-1)*limit;
 	return	await prisma.$queryRaw` 
 	SELECT id, title AS Title, summary AS Summary, user_id, thumbnail_url AS post_thumbnail_url, created_at
 	FROM posts
 	WHERE posts.user_id = ${user_id}
+	order by id desc
 	LIMIT ${start}, ${limit};`;
-  ;
+  ;}else{
+if(offset==1){
+	return	await prisma.$queryRaw` 
+	SELECT id, title AS Title, summary AS Summary, user_id, thumbnail_url AS post_thumbnail_url, created_at FROM posts WHERE posts.user_id = 1 order by id desc;
+	`;
+}else{
+
+	return [];}
+	
+
+
+  }
 
   }
 module.exports = { createPost,delPost ,getPost  };
