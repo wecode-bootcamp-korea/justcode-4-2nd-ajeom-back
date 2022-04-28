@@ -41,6 +41,15 @@ LIMIT 1`;
 
 const delPost =  async (id,user_id) => {
 
+
+	await  prisma.$queryRaw` 
+	DELETE FROM book_posts
+	WHERE book_posts.post_id = ${id};`
+  
+	await  prisma.$queryRaw` 
+	DELETE FROM post_keywords
+	WHERE post_keywords.post_id = ${id};`
+	
 	await prisma.$queryRaw` 
 	 DELETE FROM posts
 	WHERE posts.id = ${id} and posts.user_id = ${user_id};`;
