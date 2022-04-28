@@ -67,7 +67,7 @@ const delPost =  async (id,user_id) => {
   ;}else{
 if(offset==1){
 	return	await prisma.$queryRaw` 
-	SELECT id, title AS Title, summary AS Summary, user_id, thumbnail_url AS post_thumbnail_url, created_at FROM posts WHERE posts.user_id = 1 order by id desc;
+	SELECT id, title AS Title, summary AS Summary, user_id, thumbnail_url AS post_thumbnail_url, created_at FROM posts WHERE posts.user_id =  ${user_id} order by id desc;
 	`;
 }else{
 
