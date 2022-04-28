@@ -24,6 +24,7 @@ const getBook =  async (id) => {
   select 
       bo.id id,
       bo.title title,
+      bo.user_id user_id,
       (select nickname from users where id = bo.user_id) username,
       (select description from users where id = bo.user_id) user_description,
       (select profile_img_url from users where id = bo.user_id) userimage_url,
