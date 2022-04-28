@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 
 const getPost = async (id) => {
   return await prisma.$queryRaw`
-	SELECT p.id, title, subtitle, body, thumbnail_url
+	SELECT p.id, title, subtitle, body, thumbnail_url, is_published
 	, p.user_id, u.nickname, u.description, u.profile_img_url
 		, json_arrayagg(
 				json_object(

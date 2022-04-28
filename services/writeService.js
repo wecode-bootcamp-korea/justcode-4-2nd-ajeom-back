@@ -39,4 +39,13 @@ const getPost = async (user_id,offset,limit) => {
   }
 };
 
-module.exports = { createPost,delPost,getPost };
+const setIs_published = async (id,set) => {
+  try {
+  
+    return await writeDao.setIs_published(id,set);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+module.exports = { createPost,delPost,getPost,setIs_published };

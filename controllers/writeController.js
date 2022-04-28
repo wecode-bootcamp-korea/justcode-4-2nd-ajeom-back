@@ -31,8 +31,19 @@ const createPost = async (req, res) => {
 const delPost = async (req, res) => {
   try {
     const { id } = req.params;
-    await writeDao.delPost(id,req.userId );
+    await writeService.delPost(id,req.userId );
     return res.status(200).json({ message: "delet success" });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const patchPost = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    await writeService.setIs_published(id,req.query.isPublished);
+    return res.status(200).json({ message: "patch success" });
   } catch (err) {
     console.log(err);
   }
@@ -51,4 +62,4 @@ const getPost = async (req, res) => {
   }
 };
 
-module.exports = { createPost ,delPost,getPost};
+module.exports = { createPost ,delPost,getPost,patchPost};
