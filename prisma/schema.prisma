@@ -16,7 +16,7 @@ model User {
   nickname        String
   profile_img_url String?
   is_author       Boolean?
-  description     String?  @db.VarChar(300)
+  description     String?  @db.LongText
   created_at      DateTime @default(now())
   updated_at      DateTime @default(now())
 
@@ -68,7 +68,7 @@ model Post {
   title         String
 
   body          String   @db.LongText
-  summary       String   @db.VarChar(300)
+  summary       String   @db.LongText
   subtitle      String
   user_id       Int
   is_published  Boolean
@@ -89,7 +89,7 @@ model Book {
   title         String
   user_id       String
   bookcover_url String   @db.LongText
-  description   String   @db.VarChar(300)
+  description   String   @db.LongText
   created_at    DateTime @default(now())
   updated_at    DateTime @default(now())
 
