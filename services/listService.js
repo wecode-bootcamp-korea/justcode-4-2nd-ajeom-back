@@ -56,4 +56,24 @@ const getProfilePostList = async (page, pageSize, userId) => {
   }
 };
 
-module.exports = { getPostList, getDrawerPostList, getProfilePostList };
+const getMyProfilePost = async (page, pageSize, userId) => {
+  try {
+    let start = 0;
+    page <= 0 ? (page = 1) : (start = (page - 1) * pageSize);
+
+    const getMyPostAmount = await listDao.getMyPostAmount(userId);
+    const maxPage = Math.ceil(getMyPostAmount.length / pageSize);
+    if (page > maxPage) return null;
+
+    const getMyProfilePost = await listDao.getMyProfilePost(
+      start,
+      pageSize,
+      userId
+    );
+    return getMyProfilePost;
+  } catch (err) {
+    throw err;
+  }
+};
+
+module.exports = { getPostList, getDrawerPostList, getProfilePostList, getMyProfilePost };

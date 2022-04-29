@@ -61,4 +61,24 @@ const getProfilePostList = async (req, res) => {
 }
 
 
-module.exports = { getPostList, getDrawerPostList, getProfilePostList }
+const getMyProfilePost = async (req, res) => {
+  const postListInfo = req.query;
+  const page = parseInt(postListInfo.page);
+  const pageSize = parseInt(postListInfo.pageSize);
+  const userId = req.userId;
+
+  try {
+    if (!postListInfo || !pageSize || (userId === undefined)) {
+      res.status(400).json({message:"NULL VALUE"});
+    }
+    const getMyProfilePost = await listService.getMyProfilePost(page, pageSize, userId)
+
+    return res.status(200).json(getMyProfilePost)
+  } catch (err) {
+    return res.status (err.statusCode || 500).json({message: err.message});
+  }
+}
+
+
+
+module.exports = { getPostList, getDrawerPostList, getProfilePostList, getMyProfilePost }
