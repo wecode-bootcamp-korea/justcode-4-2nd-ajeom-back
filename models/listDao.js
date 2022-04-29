@@ -28,6 +28,7 @@ const getDrawerPostList = async (start, pageSize, userId) => {
   return await prisma.$queryRaw`
   SELECT posts.id, title, summary, thumbnail_url, created_at
   FROM posts WHERE is_published = 0 AND user_id = ${userId}
+  order by id desc
   LIMIT ${start}, ${pageSize};
   `;
 };
@@ -44,6 +45,7 @@ const getProfilePostList = async (start, pageSize, userId) => {
   return await prisma.$queryRaw`
   SELECT posts.id, title, summary, thumbnail_url, created_at FROM posts
   WHERE is_published = 1 AND user_id = ${userId}
+  order by id desc
   LIMIT ${start}, ${pageSize};
   `;
 };
