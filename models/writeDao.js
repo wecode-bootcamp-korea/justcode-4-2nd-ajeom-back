@@ -39,7 +39,16 @@ LIMIT 1`;
 };
 
 
-const delPost =  async (id,user_id) => {
+const setIs_published =  async (id,set) => {
+
+  return 	await  prisma.$queryRaw` 
+  UPDATE posts
+SET is_published = ${set} 
+WHERE id = ${id};`;
+  }
+
+
+  const delPost =  async (id,user_id) => {
 
 
 	await  prisma.$queryRaw` 
@@ -53,9 +62,10 @@ const delPost =  async (id,user_id) => {
 	await prisma.$queryRaw` 
 	 DELETE FROM posts
 	WHERE posts.id = ${id} and posts.user_id = ${user_id};`;
-  ;
+  
   return ;
   }
+  
 
   const getPost =  async (user_id,offset,limit) => {
 
@@ -87,4 +97,4 @@ if(offset==1){
   }
 
   }
-module.exports = { createPost,delPost ,getPost  };
+module.exports = { createPost,delPost ,getPost ,setIs_published };
