@@ -55,13 +55,20 @@ const getProfilePostAmount = async (userId) => {
   `;
 };
 
-module.exports = {
-  getPostList,
-  getPostAmount,
-  getDrawerPostList,
-  getDrawerPostAmount,
-  getProfilePostList,
-  getProfilePostAmount,
+const getMyProfilePost = async (start, pageSize, userId) => {
+  console.log(userId);
+  return await prisma.$queryRaw`
+  SELECT posts.id, title, summary, thumbnail_url, created_at
+  FROM posts WHERE is_published = 1 AND user_id = ${userId}
+  LIMIT ${start}, ${pageSize};
+  `;
+};
+
+const getMyPostAmount = async (userId) => {
+  return await prisma.$queryRaw`
+  SELECT id FROM posts
+  WHERE is_published = 1 AND user_id = ${userId};
+  `;
 };
 
 module.exports = {
@@ -71,4 +78,6 @@ module.exports = {
   getDrawerPostAmount,
   getProfilePostList,
   getProfilePostAmount,
+  getMyProfilePost,
+  getMyPostAmount
 };
