@@ -1,45 +1,59 @@
 const bookService = require("../services/bookService");
 
-const postBook = async (req, res) => {
+const createBook = async (req, res) => {
   try {
-    const { title,bookcover_url,description,postIdList} = req.body;
-    const book_id= await bookService.postBook( title,req.userId,bookcover_url,description,postIdList)
-    return res.status(200).json({ message: "post success",bookId:book_id });
+    const { title, bookCoverUrl, description, postIdList } = req.body;
+    const bookId = await bookService.createBook(
+      title,
+      req.userId,
+      bookCoverUrl,
+      description,
+      postIdList
+    );
+
+    return res
+      .status(200)
+      .json({ message: "CREATING_BOOK_SUCCESS", bookId: bookId });
   } catch (err) {
     console.log(err);
   }
 };
+
 const getBook = async (req, res) => {
   try {
     const { id } = req.params;
     const bookInfo = await bookService.getBook(id);
-    return res.status(200).json({bookInfo:bookInfo});
+
+    return res.status(200).json({ bookInfo: bookInfo });
   } catch (err) {
     console.log(err);
   }
 };
 
-const getBook_postList = async (req, res) => {
+const postListByBookId = async (req, res) => {
   try {
     const { id } = req.params;
-    const postList = await bookService.getBook_postList(id);
-    return res.status(200).json({postList:postList});
+    const postList = await bookService.postListByBookId(id);
+
+    return res.status(200).json({ postList: postList });
   } catch (err) {
     console.log(err);
   }
 };
 
-const delBook = async (req, res) => {
+const deleteBook = async (req, res) => {
   try {
     const { id } = req.params;
-    await bookService.delBook(id,req.userId );
-    return res.status(200).json({ message: "delet success" });
+    await bookService.deleteBook(id, req.userId);
+    return res.status(200).json({ message: "DELETE_SUCCESS" });
   } catch (err) {
     console.log(err);
   }
 };
-
 
 module.exports = {
-    postBook,getBook,getBook_postList,delBook 
+  createBook,
+  getBook,
+  postListByBookId,
+  deleteBook,
 };
