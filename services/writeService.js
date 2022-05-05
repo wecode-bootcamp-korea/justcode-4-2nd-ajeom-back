@@ -10,7 +10,7 @@ const createPost = async (
   thumbnailUrl,
   keywordIdList
 ) => {
-  const post_id = await writeDao.createPost(
+  const postId = await writeDao.createPost(
     title,
     body,
     summary,
@@ -20,7 +20,7 @@ const createPost = async (
     thumbnailUrl,
     keywordIdList
   );
-  return post_id;
+  return postId;
 };
 
 const deletePost = async (id, user_id) => {

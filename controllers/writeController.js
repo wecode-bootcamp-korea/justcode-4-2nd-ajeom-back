@@ -12,7 +12,7 @@ const createPost = async (req, res) => {
       keywordIdList,
     } = req.body;
 
-    const post_id = await writeService.createPost(
+    const postId = await writeService.createPost(
       title,
       body,
       summary,
@@ -23,7 +23,7 @@ const createPost = async (req, res) => {
       keywordIdList
     );
 
-    res.status(200).json({ message: "POSTING_SUCCESS", post_id: post_id });
+    res.status(200).json({ message: "POSTING_SUCCESS", postId: postId });
   } catch (err) {
     console.log(err);
     return res.status(err.statusCode || 500).json({ message: err.message });

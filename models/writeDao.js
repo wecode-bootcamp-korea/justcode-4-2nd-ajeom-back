@@ -26,7 +26,7 @@ const createPost = async (
 		)
 	`;
 
-  const [post_id] = await prisma.$queryRaw`
+  const [postId] = await prisma.$queryRaw`
 		SELECT id, title, body, summary, subtitle, user_id, is_published, thumbnail_url
 		FROM posts
 		ORDER BY id DESC
@@ -36,10 +36,10 @@ const createPost = async (
   for (i = 0; i < keywordIdList.length; i++) {
     await prisma.$queryRaw`
 			INSERT INTO post_keywords (post_id,keyword_id)
-			VALUES (${post_id.id},${keywordIdList[i]});
+			VALUES (${postId.id},${keywordIdList[i]});
 		`;
   }
-  return post_id.id;
+  return postId.id;
 };
 
 const setIsPublished = async (id, set) => {
