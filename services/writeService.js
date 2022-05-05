@@ -7,7 +7,8 @@ const createPost = async (
   subtitle,
   userId,
   isPublished,
-  thumbnailUrl,keywordIdList
+  thumbnailUrl,
+  keywordIdList
 ) => {
   const post_id = await writeDao.createPost(
     title,
@@ -16,36 +17,35 @@ const createPost = async (
     subtitle,
     userId,
     isPublished,
-    thumbnailUrl,keywordIdList
+    thumbnailUrl,
+    keywordIdList
   );
   return post_id;
 };
-const delPost = async (id,user_id) => {
-  try {
 
-     await writeDao.delPost(id,user_id);
-    return;
+const deletePost = async (id, user_id) => {
+  try {
+    return await writeDao.deletePost(id, user_id);
   } catch (err) {
     console.log(err);
   }
 };
-const getPost = async (user_id,offset,limit) => {
+const getPost = async (user_id, offset, limit) => {
   try {
+    const postList = await writeDao.getPost(user_id, offset, limit);
 
-    const postList=  await writeDao.getPost(user_id,offset,limit);
     return postList;
   } catch (err) {
     console.log(err);
   }
 };
 
-const setIs_published = async (id,set) => {
+const setIsPublished = async (id, set) => {
   try {
-  
-    return await writeDao.setIs_published(id,set);
+    return await writeDao.setIsPublished(id, set);
   } catch (err) {
     console.log(err);
   }
 };
 
-module.exports = { createPost,delPost,getPost,setIs_published };
+module.exports = { createPost, deletePost, getPost, setIsPublished };
