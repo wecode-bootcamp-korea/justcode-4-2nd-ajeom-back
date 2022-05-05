@@ -29,6 +29,7 @@ const getDrawerPostList = async (start, pageSize, userId) => {
     SELECT posts.id, title, summary, thumbnail_url, created_at
     FROM posts
     WHERE is_published = 0 AND user_id = ${userId}
+    ORDER BY id DESC
     LIMIT ${start}, ${pageSize};
   `;
 };
@@ -46,6 +47,7 @@ const getProfilePostList = async (start, pageSize, userId) => {
     SELECT posts.id, title, summary, thumbnail_url, created_at
     FROM posts
     WHERE is_published = 1 AND user_id = ${userId}
+    ORDER BY id DESC
     LIMIT ${start}, ${pageSize};
   `;
 };
