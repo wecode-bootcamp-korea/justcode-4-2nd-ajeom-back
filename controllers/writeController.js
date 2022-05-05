@@ -56,10 +56,10 @@ const patchPost = async (req, res) => {
 
 const getPost = async (req, res) => {
   try {
-    const user_id = req.userId;
+    const userId = req.userId;
     const offset = req.query.offset;
     const limit = req.query.limit;
-    const postlist = await writeService.getPost(user_id, offset, limit);
+    const postlist = await writeService.getPost(userId, offset, limit);
     return res.status(200).json({ PostList: postlist });
   } catch (err) {
     console.log(err);

@@ -50,7 +50,7 @@ const setIsPublished = async (id, set) => {
 };
 
 // 게시글 삭제
-const deletePost = async (id, user_id) => {
+const deletePost = async (id, userId) => {
   await prisma.$queryRaw` 
 		DELETE FROM book_posts
 		WHERE book_posts.post_id = ${id};
@@ -63,17 +63,17 @@ const deletePost = async (id, user_id) => {
 
   await prisma.$queryRaw` 
 		DELETE FROM posts
-		WHERE posts.id = ${id} and posts.user_id = ${user_id};
+		WHERE posts.id = ${id} and posts.user_id = ${userId};
 	`;
 
   return;
 };
 
 // 해당 유저가 쓴 post 리스트
-const getPost = async (user_id, offset, limit) => {
+const getPost = async (userId, offset, limit) => {
   // 해당 유저가 쓴 post 개수
   let count = await prisma.$queryRaw` 
-		SELECT COUNT(id) AS C FROM posts where user_id= ${user_id};
+		SELECT COUNT(id) AS C FROM posts where user_id= ${userId};
 	`;
   count = count[0].C;
 
@@ -85,7 +85,7 @@ const getPost = async (user_id, offset, limit) => {
     return await prisma.$queryRaw` 
 			SELECT id, title AS Title, summary AS Summary, user_id, thumbnail_url AS post_thumbnail_url, created_at
 			FROM posts
-			WHERE posts.user_id = ${user_id}
+			WHERE posts.user_id = ${userId}
 			ORDER BY id DESC
 			LIMIT ${start}, ${limit};
 		`;
@@ -95,7 +95,7 @@ const getPost = async (user_id, offset, limit) => {
       return await prisma.$queryRaw` 
 				SELECT id, title AS Title, summary AS Summary, user_id, thumbnail_url AS post_thumbnail_url, created_at
 				FROM posts 
-				WHERE posts.user_id =  ${user_id}
+				WHERE posts.user_id =  ${userId}
 				ORDER BY id DESC;
 			`;
     } else {

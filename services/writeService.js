@@ -23,16 +23,16 @@ const createPost = async (
   return postId;
 };
 
-const deletePost = async (id, user_id) => {
+const deletePost = async (id, userId) => {
   try {
-    return await writeDao.deletePost(id, user_id);
+    return await writeDao.deletePost(id, userId);
   } catch (err) {
     console.log(err);
   }
 };
-const getPost = async (user_id, offset, limit) => {
+const getPost = async (userId, offset, limit) => {
   try {
-    const postList = await writeDao.getPost(user_id, offset, limit);
+    const postList = await writeDao.getPost(userId, offset, limit);
 
     return postList;
   } catch (err) {
