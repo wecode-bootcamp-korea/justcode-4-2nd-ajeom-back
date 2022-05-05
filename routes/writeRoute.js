@@ -14,7 +14,7 @@ router.post(
 router.delete(
   "/:id",
   authorizedUser.getUserIdByVerifyToken,
-  writeController.delPost
+  writeController.deletePost
 );
 
 // 해당 id의 post의 발행 여부 수정
