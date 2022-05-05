@@ -8,7 +8,7 @@ const getPostList = async (req, res) => {
 
   try {
     if (!postListInfo || !pageSize) {
-      res.status(400).json({ message: "NULL VALUE" });
+      res.status(400).json({ message: "INVALID_VALUES" });
     }
     const getPostList = await listService.getPostList(
       page,
@@ -22,7 +22,6 @@ const getPostList = async (req, res) => {
   }
 };
 
-
 const getDrawerPostList = async (req, res) => {
   const postListInfo = req.query;
   const page = parseInt(postListInfo.page);
@@ -30,17 +29,20 @@ const getDrawerPostList = async (req, res) => {
   const userId = req.userId;
 
   try {
-    if (!postListInfo || !pageSize || (userId === undefined)) {
-      res.status(400).json({message:"NULL VALUE"});
+    if (!postListInfo || !pageSize || userId === undefined) {
+      res.status(400).json({ message: "INVALID_VALUES" });
     }
-    const getDrawerPostList = await listService.getDrawerPostList(page, pageSize, userId)
+    const getDrawerPostList = await listService.getDrawerPostList(
+      page,
+      pageSize,
+      userId
+    );
 
-    return res.status(200).json(getDrawerPostList)
+    return res.status(200).json(getDrawerPostList);
   } catch (err) {
-    return res.status (err.statusCode || 500).json({message: err.message});
+    return res.status(err.statusCode || 500).json({ message: err.message });
   }
-}
-
+};
 
 const getProfilePostList = async (req, res) => {
   const postListInfo = req.query;
@@ -50,16 +52,19 @@ const getProfilePostList = async (req, res) => {
 
   try {
     if (!postListInfo || !pageSize) {
-      res.status(400).json({message:"NULL VALUE"});
+      res.status(400).json({ message: "INVALID_VALUES" });
     }
-    const getProfilePostList = await listService.getProfilePostList(page, pageSize, userId)
+    const getProfilePostList = await listService.getProfilePostList(
+      page,
+      pageSize,
+      userId
+    );
 
-    return res.status(200).json(getProfilePostList)
+    return res.status(200).json(getProfilePostList);
   } catch (err) {
-    return res.status (err.statusCode || 500).json({message: err.message});
+    return res.status(err.statusCode || 500).json({ message: err.message });
   }
-}
-
+};
 
 const getMyProfilePost = async (req, res) => {
   const postListInfo = req.query;
@@ -68,17 +73,24 @@ const getMyProfilePost = async (req, res) => {
   const userId = req.userId;
 
   try {
-    if (!postListInfo || !pageSize || (userId === undefined)) {
-      res.status(400).json({message:"NULL VALUE"});
+    if (!postListInfo || !pageSize || userId === undefined) {
+      res.status(400).json({ message: "INVALID_VALUES" });
     }
-    const getMyProfilePost = await listService.getMyProfilePost(page, pageSize, userId)
+    const getMyProfilePost = await listService.getMyProfilePost(
+      page,
+      pageSize,
+      userId
+    );
 
-    return res.status(200).json(getMyProfilePost)
+    return res.status(200).json(getMyProfilePost);
   } catch (err) {
-    return res.status (err.statusCode || 500).json({message: err.message});
+    return res.status(err.statusCode || 500).json({ message: err.message });
   }
-}
+};
 
-
-
-module.exports = { getPostList, getDrawerPostList, getProfilePostList, getMyProfilePost }
+module.exports = {
+  getPostList,
+  getDrawerPostList,
+  getProfilePostList,
+  getMyProfilePost,
+};
