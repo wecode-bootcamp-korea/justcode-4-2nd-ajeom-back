@@ -1,6 +1,5 @@
 writeService = require("../services/writeService");
 
-// 글 클릭 시 detail 페이지에서 사용할 API
 const createPost = async (req, res) => {
   try {
     const {
@@ -10,29 +9,34 @@ const createPost = async (req, res) => {
       subtitle,
       isPublished,
       thumbnailUrl,
-      keywordIdList
+      keywordIdList,
     } = req.body;
-    const post_id=await writeService.createPost(
+
+    const postId = await writeService.createPost(
       title,
       body,
       summary,
       subtitle,
       req.userId,
       isPublished,
-      thumbnailUrl,keywordIdList
+      thumbnailUrl,
+      keywordIdList
     );
 
-    res.status(200).json({ message: "POSTING_SUCCESS",post_id:post_id });
+    res.status(200).json({ message: "POSTING_SUCCESS", postId: postId });
   } catch (err) {
     console.log(err);
     return res.status(err.statusCode || 500).json({ message: err.message });
   }
 };
-const delPost = async (req, res) => {
+
+const deletePost = async (req, res) => {
   try {
     const { id } = req.params;
-    await writeService.delPost(id,req.userId );
-    return res.status(200).json({ message: "delet success" });
+
+    await writeService.deletePost(id, req.userId);
+
+    return res.status(200).json({ message: "DELETE_SUCCESS" });
   } catch (err) {
     console.log(err);
   }
@@ -42,8 +46,9 @@ const patchPost = async (req, res) => {
   try {
     const { id } = req.params;
 
-    await writeService.setIs_published(id,req.query.isPublished);
-    return res.status(200).json({ message: "patch success" });
+    await writeService.setIs_published(id, req.query.isPublished);
+
+    return res.status(200).json({ message: "PATCH_SUCCESS" });
   } catch (err) {
     console.log(err);
   }
@@ -51,15 +56,14 @@ const patchPost = async (req, res) => {
 
 const getPost = async (req, res) => {
   try {
-  const user_id=req.userId;
-  const offset =req.query.offset
-  const limit=req.query.limit
-  console.log(limit)
-    const postlist= await writeService.getPost(user_id,offset,limit);
-    return res.status(200).json({PostList:postlist});
+    const userId = req.userId;
+    const offset = req.query.offset;
+    const limit = req.query.limit;
+    const postlist = await writeService.getPost(userId, offset, limit);
+    return res.status(200).json({ PostList: postlist });
   } catch (err) {
     console.log(err);
   }
 };
 
-module.exports = { createPost ,delPost,getPost,patchPost};
+module.exports = { createPost, deletePost, getPost, patchPost };

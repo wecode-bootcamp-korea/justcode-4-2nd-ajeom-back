@@ -1,44 +1,58 @@
 const bookDao = require("../models/bookDao");
 
-
-const postBook = async (title,user_id,bookcover_url,description,postIdList) => {
+const createBook = async (
+  title,
+  userId,
+  bookCoverUrl,
+  description,
+  postIdList
+) => {
   try {
+    const bookId = await bookDao.createBook(
+      title,
+      userId,
+      bookCoverUrl,
+      description,
+      postIdList
+    );
 
-    const book_id= await bookDao.postBook(title,user_id,bookcover_url,description,postIdList);
-    return book_id;
+    return bookId;
   } catch (err) {
     console.log(err);
   }
 };
+
 const getBook = async (id) => {
   try {
+    const bookData = await bookDao.getBook(id);
 
-     const bookData= await bookDao.getBook(id);
     return bookData;
   } catch (err) {
     console.log(err);
   }
 };
 
-const getBook_postList = async (id) => {
+const postListByBookId = async (id) => {
   try {
+    const postList = await bookDao.postListByBookId(id);
 
-     const postList= await bookDao.getBook_postList(id);
     return postList;
   } catch (err) {
     console.log(err);
   }
 };
 
-const delBook = async (id,user_id) => {
+const deleteBook = async (id, userId) => {
   try {
-
-     await bookDao.delBook(id,user_id);
-    return;
+    return await bookDao.deleteBook(id, userId);
   } catch (err) {
     console.log(err);
   }
 };
+
 module.exports = {
-    postBook,getBook,getBook_postList,delBook
+  createBook,
+  getBook,
+  postListByBookId,
+  deleteBook,
 };
