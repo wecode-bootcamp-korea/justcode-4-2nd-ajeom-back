@@ -30,6 +30,7 @@ const deletePost = async (id, userId) => {
     console.log(err);
   }
 };
+
 const getPost = async (userId, offset, limit) => {
   try {
     const postList = await writeDao.getPost(userId, offset, limit);
