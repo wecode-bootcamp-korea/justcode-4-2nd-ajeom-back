@@ -46,7 +46,7 @@ const patchPost = async (req, res) => {
   try {
     const { id } = req.params;
 
-    await writeService.setIs_published(id, req.query.isPublished);
+    await writeService.setIsPublished(id, req.query.isPublished);
 
     return res.status(200).json({ message: "PATCH_SUCCESS" });
   } catch (err) {
